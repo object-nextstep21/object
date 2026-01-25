@@ -1,6 +1,8 @@
 package org.eternity.movie.pratice;
 
+import java.time.DayOfWeek;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import org.eternity.money.Money;
 
 public class Screening {
@@ -16,6 +18,18 @@ public class Screening {
 
     public LocalDateTime getStartTime() {
         return whenScreened;
+    }
+
+    public boolean isSameDay(DayOfWeek dayOfWeek) {
+        return whenScreened.getDayOfWeek().equals(dayOfWeek);
+    }
+
+    public boolean isAfterStartTime(LocalTime startTime) {
+        return !startTime.isAfter(whenScreened.toLocalTime());
+    }
+
+    public boolean isBeforeEndTime(LocalTime endTime) {
+        return !endTime.isBefore(whenScreened.toLocalTime());
     }
 
     public boolean isSequence(int sequence) {
