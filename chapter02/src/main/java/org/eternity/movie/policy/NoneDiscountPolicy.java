@@ -1,8 +1,7 @@
-package org.eternity.movie.step02.pricing;
+package org.eternity.movie.policy;
 
 import org.eternity.money.Money;
-import org.eternity.movie.step02.DiscountPolicy;
-import org.eternity.movie.step02.Screening;
+import org.eternity.movie.Screening;
 
 public class NoneDiscountPolicy implements DiscountPolicy {
     @Override
