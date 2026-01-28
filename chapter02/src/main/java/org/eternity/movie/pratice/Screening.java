@@ -2,8 +2,8 @@ package org.eternity.movie.pratice;
 
 import java.time.DayOfWeek;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import org.eternity.money.Money;
+import org.eternity.movie.pratice.discountcondition.TimeRange;
 
 public class Screening {
     private Movie movie;
@@ -16,20 +16,16 @@ public class Screening {
         this.whenScreened = whenScreened;
     }
 
-    public LocalDateTime getStartTime() {
-        return whenScreened;
+    public boolean isDuring(DayOfWeek dayOfWeek, TimeRange timeRange) {
+        return isSameDay(dayOfWeek) && isBetweenStartTimeAndEndTime(timeRange);
     }
 
-    public boolean isSameDay(DayOfWeek dayOfWeek) {
+    private boolean isSameDay(DayOfWeek dayOfWeek) {
         return whenScreened.getDayOfWeek().equals(dayOfWeek);
     }
 
-    public boolean isAfterStartTime(LocalTime startTime) {
-        return !startTime.isAfter(whenScreened.toLocalTime());
-    }
-
-    public boolean isBeforeEndTime(LocalTime endTime) {
-        return !endTime.isBefore(whenScreened.toLocalTime());
+    private boolean isBetweenStartTimeAndEndTime(TimeRange timeRange) {
+        return timeRange.contains(whenScreened);
     }
 
     public boolean isSequence(int sequence) {

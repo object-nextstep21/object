@@ -6,18 +6,18 @@ import org.eternity.movie.pratice.Screening;
 
 public class PeriodCondition implements DiscountCondition {
     private DayOfWeek dayOfWeek;
-    private LocalTime startTime;
-    private LocalTime endTime;
+    private TimeRange timeRange;
 
     public PeriodCondition(DayOfWeek dayOfWeek, LocalTime startTime, LocalTime endTime) {
+        this(dayOfWeek, new TimeRange(startTime, endTime));
+    }
+
+    public PeriodCondition(DayOfWeek dayOfWeek, TimeRange timeRange) {
         this.dayOfWeek = dayOfWeek;
-        this.startTime = startTime;
-        this.endTime = endTime;
+        this.timeRange = timeRange;
     }
 
     public boolean isSatisfiedBy(Screening screening) {
-        return screening.isSameDay(dayOfWeek) &&
-            screening.isAfterStartTime(startTime) &&
-            screening.isBeforeEndTime(endTime);
+        return screening.isDuring(dayOfWeek, timeRange);
     }
 }
