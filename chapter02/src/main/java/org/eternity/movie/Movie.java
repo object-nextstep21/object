@@ -1,6 +1,7 @@
-package org.eternity.movie.step01;
+package org.eternity.movie;
 
 import org.eternity.money.Money;
+import org.eternity.movie.policy.DiscountPolicy;
 
 import java.time.Duration;
 

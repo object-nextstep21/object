@@ -1,7 +1,6 @@
-package org.eternity.movie.step01.pricing;
+package org.eternity.movie.condition;
 
-import org.eternity.movie.step01.DiscountCondition;
-import org.eternity.movie.step01.Screening;
+import org.eternity.movie.Screening;
 
 public class SequenceCondition implements DiscountCondition {
     private int sequence;
