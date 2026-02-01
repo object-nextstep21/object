@@ -14,9 +14,14 @@ public class ReservationAgency {
                 discountable = screening.getWhenScreened().getDayOfWeek().equals(condition.getDayOfWeek()) &&
                     condition.getStartTime().compareTo(screening.getWhenScreened().toLocalTime()) <= 0 &&
                     condition.getEndTime().compareTo(screening.getWhenScreened().toLocalTime()) >= 0;
-            } else {
+            } else if (condition.getType() == DiscountConditionType.SEQUENCE) {
                 discountable = condition.getSequence() == screening.getSequence();
+            } else if (condition.getType() == DiscountConditionType.DAY_OF_WEEK) {
+                discountable = screening.getWhenScreened().getDayOfWeek().equals(condition.getDayOfWeek());
+            } else {
+                throw new IllegalArgumentException("Unknown DiscountConditionType");
             }
+
             if (discountable) {
                 break;
             }
