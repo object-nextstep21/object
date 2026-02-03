@@ -1,6 +1,8 @@
-package org.eternity.movie.step02;
+package org.eternity.movie.policy;
 
 import org.eternity.money.Money;
+import org.eternity.movie.condition.DiscountCondition;
+import org.eternity.movie.Screening;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -15,13 +17,11 @@ public abstract class DefaultDiscountPolicy implements DiscountPolicy {
 
     @Override
     public Money calculateDiscountAmount(Screening screening) {
-        for(DiscountCondition each : conditions) {
-            if (each.isSatisfiedBy(screening)) {
-                return getDiscountAmount(screening);
-            }
-        }
-
-        return Money.ZERO;
+        return conditions.stream()
+                .filter(condition -> condition.isSatisfiedBy(screening))
+                .findFirst()
+                .map(condition -> getDiscountAmount(screening))
+                .orElse(Money.ZERO);
     }
 
     abstract protected Money getDiscountAmount(Screening Screening);
