@@ -18,7 +18,7 @@ public abstract class DefaultDiscountPolicy implements DiscountPolicy {
     @Override
     public Money calculateDiscountAmount(Screening screening) {
         return conditions.stream()
-                .map(condition -> condition.isSatisfiedBy(screening))
+                .filter(condition -> condition.isSatisfiedBy(screening))
                 .findFirst()
                 .map(condition -> getDiscountAmount(screening))
                 .orElse(Money.ZERO);
