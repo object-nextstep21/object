@@ -2,6 +2,7 @@ package org.eternity.movie;
 
 import org.eternity.money.Money;
 
+import java.time.DayOfWeek;
 import java.time.LocalDateTime;
 
 public class Screening {
@@ -13,6 +14,10 @@ public class Screening {
         this.movie = movie;
         this.sequence = sequence;
         this.whenScreened = whenScreened;
+    }
+
+    public boolean matchesDayOfWeek(DayOfWeek dayOfWeek) {
+        return whenScreened.getDayOfWeek().equals(dayOfWeek);
     }
 
     public LocalDateTime getStartTime() {
