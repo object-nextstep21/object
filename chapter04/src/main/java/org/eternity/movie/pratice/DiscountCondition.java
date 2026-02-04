@@ -1,6 +1,7 @@
 package org.eternity.movie.pratice;
 
 import java.time.DayOfWeek;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 public class DiscountCondition {
@@ -15,6 +16,18 @@ public class DiscountCondition {
 
     public DiscountConditionType getType() {
         return type;
+    }
+
+    public boolean isPeriod() {
+        return type.isPeriod();
+    }
+
+    public boolean isSequence() {
+        return type.isSequence();
+    }
+
+    public boolean isDayOfWeek() {
+        return type.isDayOfWeek();
     }
 
     public void setType(DiscountConditionType type) {
@@ -49,7 +62,28 @@ public class DiscountCondition {
         return sequence;
     }
 
+    public boolean isSameSequence(int sequence) {
+        return this.sequence == sequence;
+    }
+
+    public boolean isSameDayOfTheWeek(LocalDateTime whenScreened) {
+        return dayOfWeek.equals(whenScreened.getDayOfWeek());
+    }
+
     public void setSequence(int sequence) {
         this.sequence = sequence;
+    }
+
+    public boolean isSamePeriod(LocalDateTime whenScreened) {
+        return isSameTime(whenScreened) && isSameDay(whenScreened);
+    }
+
+    private boolean isSameTime(LocalDateTime whenScreened) {
+        return !startTime.isAfter(whenScreened.toLocalTime()) &&
+            !endTime.isBefore(whenScreened.toLocalTime());
+    }
+
+    private boolean isSameDay(LocalDateTime whenScreened) {
+        return dayOfWeek.equals(whenScreened.getDayOfWeek());
     }
 }

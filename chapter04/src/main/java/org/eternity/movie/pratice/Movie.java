@@ -42,59 +42,23 @@ public class Movie {
         this.discountPercent = discountPercent;
     }
 
-    public String getTitle() {
-        return title;
-    }
+    public Money calculateMovieFee() {
+        if (movieType.isAmountDiscount()) {
+            return fee.minus(discountAmount);
+        }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
+        if (movieType.isPercentDiscount()) {
+            return fee.minus(fee.times(discountPercent));
+        }
 
-    public Duration getRunningTime() {
-        return runningTime;
-    }
-
-    public void setRunningTime(Duration runningTime) {
-        this.runningTime = runningTime;
+        return fee;
     }
 
     public Money getFee() {
         return fee;
     }
 
-    public void setFee(Money fee) {
-        this.fee = fee;
-    }
-
     public List<DiscountCondition> getDiscountConditions() {
         return discountConditions;
-    }
-
-    public void setDiscountConditions(List<DiscountCondition> discountConditions) {
-        this.discountConditions = discountConditions;
-    }
-
-    public MovieType getMovieType() {
-        return movieType;
-    }
-
-    public void setMovieType(MovieType movieType) {
-        this.movieType = movieType;
-    }
-
-    public Money getDiscountAmount() {
-        return discountAmount;
-    }
-
-    public void setDiscountAmount(Money discountAmount) {
-        this.discountAmount = discountAmount;
-    }
-
-    public double getDiscountPercent() {
-        return discountPercent;
-    }
-
-    public void setDiscountPercent(double discountPercent) {
-        this.discountPercent = discountPercent;
     }
 }

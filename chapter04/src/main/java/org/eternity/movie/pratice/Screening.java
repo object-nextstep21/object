@@ -8,27 +8,41 @@ public class Screening {
     private int sequence;
     private LocalDateTime whenScreened;
 
+    public Screening(Movie movie, int sequence, LocalDateTime whenScreened) {
+        this.movie = movie;
+        this.sequence = sequence;
+        this.whenScreened = whenScreened;
+    }
+
     public Movie getMovie() {
         return movie;
     }
 
-    public void setMovie(Movie movie) {
-        this.movie = movie;
+    public boolean isMovieDiscountable() {
+        for (DiscountCondition condition : movie.getDiscountConditions()) {
+            if (condition.isPeriod()) {
+                return isPeriodDiscountable(condition);
+            }
+            if (condition.isSequence()) {
+                return isSequenceDiscountable(condition);
+            }
+            if (condition.isDayOfWeek()) {
+                return isDayOfWeekDiscountable(condition);
+            }
+        }
+        return false;
     }
 
-    public LocalDateTime getWhenScreened() {
-        return whenScreened;
+    private boolean isPeriodDiscountable(DiscountCondition condition) {
+        return condition.isSamePeriod(whenScreened);
     }
 
-    public void setWhenScreened(LocalDateTime whenScreened) {
-        this.whenScreened = whenScreened;
+    private boolean isSequenceDiscountable(DiscountCondition condition) {
+        return condition.isSameSequence(sequence);
     }
 
-    public int getSequence() {
-        return sequence;
+    private boolean isDayOfWeekDiscountable(DiscountCondition condition) {
+        return condition.isSameDayOfTheWeek(whenScreened);
     }
 
-    public void setSequence(int sequence) {
-        this.sequence = sequence;
-    }
 }
