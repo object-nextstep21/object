@@ -1,11 +1,10 @@
 package org.eternity.movie.step01;
 
-import org.eternity.money.Money;
-
 import java.time.Duration;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import org.eternity.money.Money;
 
 public class Movie {
     private String title;
@@ -79,4 +78,5 @@ public class Movie {
     public void setDiscountPercent(double discountPercent) {
         this.discountPercent = discountPercent;
     }
+
 }
