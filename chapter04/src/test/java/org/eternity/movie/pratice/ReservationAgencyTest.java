@@ -98,10 +98,6 @@ class ReservationAgencyTest {
     }
 
     private Screening screening(Movie movie, int sequence, LocalDateTime whenScreened) {
-        Screening screening = new Screening();
-        screening.setMovie(movie);
-        screening.setSequence(sequence);
-        screening.setWhenScreened(whenScreened);
-        return screening;
+        return new Screening(movie, sequence, whenScreened);
     }
 }
