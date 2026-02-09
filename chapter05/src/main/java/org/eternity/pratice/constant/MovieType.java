@@ -1,4 +1,4 @@
-package org.eternity.pratice;
+package org.eternity.pratice.constant;
 
 public enum MovieType {
     AMOUNT_DISCOUNT,    // 금액 할인 정책

@@ -1,4 +1,4 @@
-package org.eternity.pratice;
+package org.eternity.pratice.constant;
 
 public enum DiscountConditionType {
     SEQUENCE,       // 순번조건

@@ -1,9 +1,10 @@
 package org.eternity.pratice;
 
 import org.eternity.money.Money;
+import org.eternity.pratice.condition.DiscountCondition;
+import org.eternity.pratice.constant.MovieType;
 
 import java.time.Duration;
-import java.util.Collections;
 import java.util.List;
 
 public class Movie {
@@ -20,12 +21,12 @@ public class Movie {
         if(isDiscountable(screening)){
             return fee.minus(calculateDiscountAmount());
         }
+
         return fee;
     }
 
     private boolean isDiscountable(Screening screening) {
-        return discountConditions.stream()
-                .anyMatch(condition -> condition.isSatisfiedBy(screening));
+        return this.discountConditions.stream().anyMatch(coundition -> coundition.isSatisfiedBy(screening));
     }
 
     public Money calculateDiscountAmount() {
@@ -52,47 +53,5 @@ public class Movie {
     private Money calculateNoneDiscountAmount() {
         return Money.ZERO;
     }
-
-    public MovieType getMovieType() {
-        return movieType;
-    }
-
-    public void setMovieType(MovieType movieType) {
-        this.movieType = movieType;
-    }
-
-    public Money getFee() {
-        return fee;
-    }
-
-    public void setFee(Money fee) {
-        this.fee = fee;
-    }
-
-    public List<DiscountCondition> getDiscountConditions() {
-        return Collections.unmodifiableList(discountConditions);
-    }
-
-    public void setDiscountConditions(
-            List<DiscountCondition> discountConditions) {
-        this.discountConditions = discountConditions;
-    }
-
-    public Money getDiscountAmount() {
-        return discountAmount;
-    }
-
-    public void setDiscountAmount(Money discountAmount) {
-        this.discountAmount = discountAmount;
-    }
-
-    public double getDiscountPercent() {
-        return discountPercent;
-    }
-
-    public void setDiscountPercent(double discountPercent) {
-        this.discountPercent = discountPercent;
-    }
-
 
 }
