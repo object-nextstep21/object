@@ -1,6 +1,7 @@
 package org.eternity.pratice;
 
 import org.eternity.money.Money;
+import org.eternity.pratice.movie.Movie;
 
 import java.time.LocalDateTime;
 
