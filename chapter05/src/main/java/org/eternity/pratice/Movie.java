@@ -16,6 +16,32 @@ public class Movie {
     private Money discountAmount;
     private double discountPercent;
 
+    public Money calculateDiscountedFee() {
+        switch(this.movieType) {
+            case AMOUNT_DISCOUNT:
+                return calculateAmountDiscountedFee();
+            case PERCENT_DISCOUNT:
+                return calculatePercentDiscountedFee();
+            case NONE_DISCOUNT:
+                return calculateNoneDiscountedFee();
+        }
+
+        throw new IllegalArgumentException();
+    }
+
+    private Money calculateAmountDiscountedFee() {
+        return this.discountAmount;
+    }
+
+    private Money calculatePercentDiscountedFee() {
+        return this.fee.times(this.discountPercent);
+    }
+
+    private Money calculateNoneDiscountedFee() {
+        return this.fee;
+    }
+
+
     public MovieType getMovieType() {
         return movieType;
     }
