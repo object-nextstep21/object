@@ -15,12 +15,12 @@ public class Screening {
         return new Reservation(customer, this, fee, audienceCount);
     }
 
-    public boolean checkDiscountable() {
+    private boolean checkDiscountable() {
         return this.movie.getDiscountConditions().stream()
                 .anyMatch(condition -> condition.isDiscountable(this));
     }
 
-    public Money calculateFee(boolean discountable, int audienceCount) {
+    private Money calculateFee(boolean discountable, int audienceCount) {
         if (discountable) {
             return this.movie.getFee()
                     .minus(this.movie.calculateDiscountedFee())
