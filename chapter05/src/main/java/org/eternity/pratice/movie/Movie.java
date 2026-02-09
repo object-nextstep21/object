@@ -3,23 +3,25 @@ package org.eternity.pratice.movie;
 import org.eternity.money.Money;
 import org.eternity.pratice.Screening;
 import org.eternity.pratice.condition.DiscountCondition;
-import org.eternity.pratice.constant.MovieType;
+import org.eternity.pratice.condition.DiscountConditions;
 
 import java.time.Duration;
-import java.util.Arrays;
-import java.util.List;
 
 public abstract class Movie {
     private String title;
     private Duration runningTime;
     private Money fee;
-    private List<DiscountCondition> discountConditions;
+    private DiscountConditions discountConditions;
 
     public Movie(String title, Duration runningTime, Money fee, DiscountCondition... discountConditions) {
+        this(title, runningTime, fee, new DiscountConditions(discountConditions));
+    }
+
+    public Movie(String title, Duration runningTime, Money fee, DiscountConditions discountConditions) {
         this.title = title;
         this.runningTime = runningTime;
         this.fee = fee;
-        this.discountConditions = Arrays.asList(discountConditions);
+        this.discountConditions = discountConditions;
     }
 
     public Money calculateMoviFee(Screening screening) {
@@ -31,7 +33,7 @@ public abstract class Movie {
     }
 
     private boolean isDiscountable(Screening screening) {
-        return this.discountConditions.stream().anyMatch(coundition -> coundition.isSatisfiedBy(screening));
+        return this.discountConditions.isSatisfiedBy(screening);
     }
 
     /**
