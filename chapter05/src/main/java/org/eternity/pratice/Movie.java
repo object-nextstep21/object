@@ -16,31 +16,42 @@ public class Movie {
     private Money discountAmount;
     private double discountPercent;
 
-    public Money calculateDiscountedFee() {
+    public Money calculateMoviFee(Screening screening) {
+        if(isDiscountable(screening)){
+            return fee.minus(calculateDiscountAmount());
+        }
+        return fee;
+    }
+
+    private boolean isDiscountable(Screening screening) {
+        return discountConditions.stream()
+                .anyMatch(condition -> condition.isSatisfiedBy(screening));
+    }
+
+    public Money calculateDiscountAmount() {
         switch(this.movieType) {
             case AMOUNT_DISCOUNT:
-                return calculateAmountDiscountedFee();
+                return calculateAmountDiscountAmount();
             case PERCENT_DISCOUNT:
-                return calculatePercentDiscountedFee();
+                return calculatePercentDiscountAmount();
             case NONE_DISCOUNT:
-                return calculateNoneDiscountedFee();
+                return calculateNoneDiscountAmount();
         }
 
         throw new IllegalArgumentException();
     }
 
-    private Money calculateAmountDiscountedFee() {
+    private Money calculateAmountDiscountAmount() {
         return this.discountAmount;
     }
 
-    private Money calculatePercentDiscountedFee() {
+    private Money calculatePercentDiscountAmount() {
         return this.fee.times(this.discountPercent);
     }
 
-    private Money calculateNoneDiscountedFee() {
-        return this.fee;
+    private Money calculateNoneDiscountAmount() {
+        return Money.ZERO;
     }
-
 
     public MovieType getMovieType() {
         return movieType;
@@ -82,4 +93,6 @@ public class Movie {
     public void setDiscountPercent(double discountPercent) {
         this.discountPercent = discountPercent;
     }
+
+
 }

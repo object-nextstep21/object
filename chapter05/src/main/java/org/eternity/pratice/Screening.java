@@ -9,27 +9,18 @@ public class Screening {
     private int sequence;
     private LocalDateTime whenScreened;
 
-    public Reservation createReservation(Customer customer, int audienceCount) {
-        boolean discountable = checkDiscountable();
-        Money fee = calculateFee(discountable, audienceCount);
-        return new Reservation(customer, this, fee, audienceCount);
+
+    /**
+     * Screening이 Reservation 생성
+     * Screening은 예매에 대한 정보 전문가인 ㅈ동시에 Reservation의 창조자
+     */
+    public Reservation reserve(Customer customer, int audienceCount) {
+        return new Reservation(customer, this, calculateFee(audienceCount), audienceCount);
     }
 
-    private boolean checkDiscountable() {
-        return this.movie.getDiscountConditions().stream()
-                .anyMatch(condition -> condition.isDiscountable(this));
+    private Money calculateFee(int audienceCount) {
+        return movie.calculateMoviFee(this).times(audienceCount);
     }
-
-    private Money calculateFee(boolean discountable, int audienceCount) {
-        if (discountable) {
-            return this.movie.getFee()
-                    .minus(this.movie.calculateDiscountedFee())
-                    .times(audienceCount);
-        }
-
-        return this.movie.getFee();
-    }
-
 
     public Movie getMovie() {
         return movie;
