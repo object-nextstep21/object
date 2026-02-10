@@ -1,8 +1,8 @@
 package org.eternity.pratice;
 
 public class Customer {
-    private String name;
-    private String id;
+    private final String name;
+    private final String id;
 
     public Customer(String name, String id) {
         this.id = id;

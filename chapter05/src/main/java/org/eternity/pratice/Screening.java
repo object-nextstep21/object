@@ -10,6 +10,11 @@ public class Screening {
     private int sequence;
     private LocalDateTime whenScreened;
 
+    public Screening(Movie movie, int sequence, LocalDateTime whenScreened) {
+        this.movie = movie;
+        this.sequence = sequence;
+        this.whenScreened = whenScreened;
+    }
 
     /**
      * Screening이 Reservation 생성

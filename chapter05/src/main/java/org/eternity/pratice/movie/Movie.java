@@ -8,8 +8,8 @@ import org.eternity.pratice.condition.DiscountConditions;
 import java.time.Duration;
 
 public abstract class Movie {
-    private String title;
-    private Duration runningTime;
+    private final String title;
+    private final Duration runningTime;
     private Money fee;
     private DiscountConditions discountConditions;
 

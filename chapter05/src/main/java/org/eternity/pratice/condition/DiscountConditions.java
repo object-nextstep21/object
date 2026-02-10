@@ -1,7 +1,6 @@
 package org.eternity.pratice.condition;
 
 import org.eternity.pratice.Screening;
-
 import java.util.Arrays;
 import java.util.List;
 
