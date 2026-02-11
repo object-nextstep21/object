@@ -29,10 +29,7 @@ public class Screening {
     }
 
     public Money calculateMovieFee() {
-        if (movie.isMovieDiscountable(this)) {
-            return movie.calculateMovieFee();
-        }
-        return movie.getFee();
+        return movie.calculateMovieFee(this);
     }
 
 }

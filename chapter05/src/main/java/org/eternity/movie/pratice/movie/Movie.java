@@ -1,44 +1,29 @@
 package org.eternity.movie.pratice.movie;
 
 import java.time.Duration;
-import java.util.List;
 import org.eternity.money.Money;
 import org.eternity.movie.pratice.Screening;
-import org.eternity.movie.pratice.discountcondition.DiscountCondition;
+import org.eternity.movie.pratice.discountpolicy.DiscountPolicy;
 
-public abstract class Movie {
+public class Movie {
 
     private String title;
     private Duration runningTime;
     protected Money fee;
-    private List<DiscountCondition> discountConditions;
+    private DiscountPolicy discountPolicy;
 
-    public Movie(String title, Duration runningTime, Money fee, List<DiscountCondition> discountConditions) {
+    public Movie(String title, Duration runningTime, Money fee, DiscountPolicy discountPolicy) {
         this.title = title;
         this.runningTime = runningTime;
         this.fee = fee;
-        this.discountConditions = discountConditions;
+        this.discountPolicy = discountPolicy;
     }
 
-    public Money calculateMovieFee() {
-        return calculateDiscountAmount();
+    public Money calculateMovieFee(Screening screening) {
+        return fee.minus(discountPolicy.calculateMovieFee(screening));
     }
 
     public Money getFee() {
         return fee;
     }
-
-    public List<DiscountCondition> getDiscountConditions() {
-        return discountConditions;
-    }
-
-    public boolean isMovieDiscountable(Screening screening) {
-        if (discountConditions == null || discountConditions.isEmpty()) {
-            return false;
-        }
-        return discountConditions.stream()
-            .anyMatch(discountCondition -> discountCondition.isMovieDiscountable(screening));
-    }
-
-    abstract protected Money calculateDiscountAmount();
 }

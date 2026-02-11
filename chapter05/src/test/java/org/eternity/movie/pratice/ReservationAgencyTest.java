@@ -10,10 +10,10 @@ import org.eternity.movie.pratice.discountcondition.DayOfWeekDiscountCondition;
 import org.eternity.movie.pratice.discountcondition.DiscountCondition;
 import org.eternity.movie.pratice.discountcondition.PeriodDiscountCondition;
 import org.eternity.movie.pratice.discountcondition.SequenceDiscountCondition;
-import org.eternity.movie.pratice.movie.AmountDiscountMovie;
+import org.eternity.movie.pratice.discountpolicy.AmountDiscountPolicy;
+import org.eternity.movie.pratice.discountpolicy.NoneDiscountPolicy;
+import org.eternity.movie.pratice.discountpolicy.PercentDiscountPolicy;
 import org.eternity.movie.pratice.movie.Movie;
-import org.eternity.movie.pratice.movie.NoneDiscountMovie;
-import org.eternity.movie.pratice.movie.PercentDiscountMovie;
 import org.junit.jupiter.api.Test;
 
 class ReservationAgencyTest {
@@ -27,12 +27,11 @@ class ReservationAgencyTest {
     void periodCondition_appliesAmountDiscount() {
         DiscountCondition condition = new PeriodDiscountCondition(DayOfWeek.MONDAY, LocalTime.of(10, 0), LocalTime.of(12, 0));
 
-        Movie movie = new AmountDiscountMovie(
+        Movie movie = new Movie(
             "AmountDiscount",
             Duration.ofMinutes(120),
             Money.wons(10_000),
-            Money.wons(1_000),
-            condition
+            new AmountDiscountPolicy(Money.wons(1_000), condition)
         );
 
         Screening screening = screening(movie, 1, LocalDateTime.of(2026, 2, 2, 10, 30));
@@ -46,12 +45,11 @@ class ReservationAgencyTest {
     void sequenceCondition_appliesPercentDiscount() {
         DiscountCondition condition = new SequenceDiscountCondition(2);
 
-        Movie movie = new PercentDiscountMovie(
+        Movie movie = new Movie(
             TITLE_PERCENT_DISCOUNT,
             Duration.ofMinutes(120),
             Money.wons(10_000),
-            0.1,
-            condition
+            new PercentDiscountPolicy(0.1, condition)
         );
 
         Screening screening = screening(movie, 2, LocalDateTime.of(2026, 2, 4, 14, 0));
@@ -65,12 +63,11 @@ class ReservationAgencyTest {
     void periodCondition_notMatched_usesBaseFee() {
         DiscountCondition condition = new PeriodDiscountCondition(DayOfWeek.MONDAY, LocalTime.of(10, 0), LocalTime.of(12, 0));
 
-        Movie movie = new AmountDiscountMovie(
+        Movie movie = new Movie(
             "AmountDiscountWhenConditionMatched",
             Duration.ofMinutes(120),
             Money.wons(10_000),
-            Money.wons(1_000),
-            condition
+            new AmountDiscountPolicy(Money.wons(1_000), condition)
         );
 
         Screening screening = screening(movie, 1, LocalDateTime.of(2026, 2, 3, 10, 30));
@@ -84,12 +81,11 @@ class ReservationAgencyTest {
     void sequenceCondition_notMatched_usesBaseFee() {
         DiscountCondition condition = new SequenceDiscountCondition(2);
 
-        Movie movie = new PercentDiscountMovie(
+        Movie movie = new Movie(
             "PercentDiscountWhenConditionMatched",
             Duration.ofMinutes(120),
             Money.wons(10_000),
-            0.1,
-            condition
+            new PercentDiscountPolicy(0.1, condition)
         );
 
         Screening screening = screening(movie, 1, LocalDateTime.of(2026, 2, 4, 14, 0));
@@ -103,10 +99,11 @@ class ReservationAgencyTest {
     void dayOfWeekCondition_appliesNoneDiscount() {
         DiscountCondition condition = new DayOfWeekDiscountCondition(DayOfWeek.WEDNESDAY);
 
-        Movie movie = new NoneDiscountMovie(
+        Movie movie = new Movie(
             TITLE_NONE_DISCOUNT,
             Duration.ofMinutes(120),
-            Money.wons(10_000)
+            Money.wons(10_000),
+            new NoneDiscountPolicy()
         );
 
         Screening screening = screening(movie, 1, LocalDateTime.of(2026, 2, 4, 11, 0));
@@ -118,10 +115,11 @@ class ReservationAgencyTest {
 
     @Test
     void noConditionMatched_usesBaseFee() {
-        Movie movie = new NoneDiscountMovie(
+        Movie movie = new Movie(
             TITLE_NO_DISCOUNT,
             Duration.ofMinutes(120),
-            Money.wons(10_000)
+            Money.wons(10_000),
+            new NoneDiscountPolicy()
         );
 
         Screening screening = screening(movie, 1, LocalDateTime.of(2026, 2, 4, 11, 0));
