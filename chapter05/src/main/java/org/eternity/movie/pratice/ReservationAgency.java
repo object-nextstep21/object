@@ -1,5 +1,7 @@
 package org.eternity.movie.pratice;
 
+import org.eternity.movie.pratice.movie.Movie;
+
 public class ReservationAgency {
 
     public Reservation reserve(Screening screening, Customer customer, int audienceCount) {

@@ -54,31 +54,32 @@ public class DiscountCondition {
         return type.isDayOfWeek();
     }
 
-    public DayOfWeek getDayOfWeek() {
-        return dayOfWeek;
-    }
-
-    public LocalTime getStartTime() {
-        return startTime;
-    }
-
-    public LocalTime getEndTime() {
-        return endTime;
+    public boolean isMovieDiscountable(Screening screening) {
+        if (type.isPeriod()) {
+            return isSamePeriod(screening.getWhenScreened());
+        }
+        if (type.isSequence()) {
+            return isSameSequence(screening.getSequence());
+        }
+        if (type.isDayOfWeek()) {
+            return isSameDayOfTheWeek(screening.getWhenScreened());
+        }
+        return false;
     }
 
     public int getSequence() {
         return sequence;
     }
 
-    public boolean isSameSequence(int sequence) {
+    private boolean isSameSequence(int sequence) {
         return this.sequence == sequence;
     }
 
-    public boolean isSameDayOfTheWeek(LocalDateTime whenScreened) {
+    private boolean isSameDayOfTheWeek(LocalDateTime whenScreened) {
         return dayOfWeek.equals(whenScreened.getDayOfWeek());
     }
 
-    public boolean isSamePeriod(LocalDateTime whenScreened) {
+    private boolean isSamePeriod(LocalDateTime whenScreened) {
         return isSameTime(whenScreened) && isSameDay(whenScreened);
     }
 

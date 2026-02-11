@@ -6,6 +6,10 @@ import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import org.eternity.money.Money;
+import org.eternity.movie.pratice.movie.AmountDiscountMovie;
+import org.eternity.movie.pratice.movie.Movie;
+import org.eternity.movie.pratice.movie.NoneDiscountMovie;
+import org.eternity.movie.pratice.movie.PercentDiscountMovie;
 import org.junit.jupiter.api.Test;
 
 class ReservationAgencyTest {
@@ -19,7 +23,7 @@ class ReservationAgencyTest {
     void periodCondition_appliesAmountDiscount() {
         DiscountCondition condition = new DiscountCondition(DayOfWeek.MONDAY, LocalTime.of(10, 0), LocalTime.of(12, 0));
 
-        Movie movie = new Movie(
+        Movie movie = new AmountDiscountMovie(
             "AmountDiscount",
             Duration.ofMinutes(120),
             Money.wons(10_000),
@@ -38,7 +42,7 @@ class ReservationAgencyTest {
     void sequenceCondition_appliesPercentDiscount() {
         DiscountCondition condition = new DiscountCondition(2);
 
-        Movie movie = new Movie(
+        Movie movie = new PercentDiscountMovie(
             TITLE_PERCENT_DISCOUNT,
             Duration.ofMinutes(120),
             Money.wons(10_000),
@@ -57,7 +61,7 @@ class ReservationAgencyTest {
     void periodCondition_notMatched_usesBaseFee() {
         DiscountCondition condition = new DiscountCondition(DayOfWeek.MONDAY, LocalTime.of(10, 0), LocalTime.of(12, 0));
 
-        Movie movie = new Movie(
+        Movie movie = new AmountDiscountMovie(
             "AmountDiscountWhenConditionMatched",
             Duration.ofMinutes(120),
             Money.wons(10_000),
@@ -76,7 +80,7 @@ class ReservationAgencyTest {
     void sequenceCondition_notMatched_usesBaseFee() {
         DiscountCondition condition = new DiscountCondition(2);
 
-        Movie movie = new Movie(
+        Movie movie = new PercentDiscountMovie(
             "PercentDiscountWhenConditionMatched",
             Duration.ofMinutes(120),
             Money.wons(10_000),
@@ -95,11 +99,10 @@ class ReservationAgencyTest {
     void dayOfWeekCondition_appliesNoneDiscount() {
         DiscountCondition condition = new DiscountCondition(DayOfWeek.WEDNESDAY);
 
-        Movie movie = new Movie(
+        Movie movie = new NoneDiscountMovie(
             TITLE_NONE_DISCOUNT,
             Duration.ofMinutes(120),
-            Money.wons(10_000),
-            condition
+            Money.wons(10_000)
         );
 
         Screening screening = screening(movie, 1, LocalDateTime.of(2026, 2, 4, 11, 0));
@@ -111,7 +114,7 @@ class ReservationAgencyTest {
 
     @Test
     void noConditionMatched_usesBaseFee() {
-        Movie movie = new Movie(
+        Movie movie = new NoneDiscountMovie(
             TITLE_NO_DISCOUNT,
             Duration.ofMinutes(120),
             Money.wons(10_000)
