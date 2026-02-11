@@ -4,7 +4,7 @@ import java.time.Duration;
 import java.util.Arrays;
 import java.util.List;
 import org.eternity.money.Money;
-import org.eternity.movie.pratice.DiscountCondition;
+import org.eternity.movie.pratice.discountcondition.DiscountCondition;
 
 public class AmountDiscountMovie extends Movie {
 

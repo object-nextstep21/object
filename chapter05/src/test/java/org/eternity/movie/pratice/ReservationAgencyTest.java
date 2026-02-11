@@ -6,6 +6,10 @@ import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import org.eternity.money.Money;
+import org.eternity.movie.pratice.discountcondition.DayOfWeekDiscountCondition;
+import org.eternity.movie.pratice.discountcondition.DiscountCondition;
+import org.eternity.movie.pratice.discountcondition.PeriodDiscountCondition;
+import org.eternity.movie.pratice.discountcondition.SequenceDiscountCondition;
 import org.eternity.movie.pratice.movie.AmountDiscountMovie;
 import org.eternity.movie.pratice.movie.Movie;
 import org.eternity.movie.pratice.movie.NoneDiscountMovie;
@@ -21,7 +25,7 @@ class ReservationAgencyTest {
 
     @Test
     void periodCondition_appliesAmountDiscount() {
-        DiscountCondition condition = new DiscountCondition(DayOfWeek.MONDAY, LocalTime.of(10, 0), LocalTime.of(12, 0));
+        DiscountCondition condition = new PeriodDiscountCondition(DayOfWeek.MONDAY, LocalTime.of(10, 0), LocalTime.of(12, 0));
 
         Movie movie = new AmountDiscountMovie(
             "AmountDiscount",
@@ -40,7 +44,7 @@ class ReservationAgencyTest {
 
     @Test
     void sequenceCondition_appliesPercentDiscount() {
-        DiscountCondition condition = new DiscountCondition(2);
+        DiscountCondition condition = new SequenceDiscountCondition(2);
 
         Movie movie = new PercentDiscountMovie(
             TITLE_PERCENT_DISCOUNT,
@@ -59,7 +63,7 @@ class ReservationAgencyTest {
 
     @Test
     void periodCondition_notMatched_usesBaseFee() {
-        DiscountCondition condition = new DiscountCondition(DayOfWeek.MONDAY, LocalTime.of(10, 0), LocalTime.of(12, 0));
+        DiscountCondition condition = new PeriodDiscountCondition(DayOfWeek.MONDAY, LocalTime.of(10, 0), LocalTime.of(12, 0));
 
         Movie movie = new AmountDiscountMovie(
             "AmountDiscountWhenConditionMatched",
@@ -78,7 +82,7 @@ class ReservationAgencyTest {
 
     @Test
     void sequenceCondition_notMatched_usesBaseFee() {
-        DiscountCondition condition = new DiscountCondition(2);
+        DiscountCondition condition = new SequenceDiscountCondition(2);
 
         Movie movie = new PercentDiscountMovie(
             "PercentDiscountWhenConditionMatched",
@@ -97,7 +101,7 @@ class ReservationAgencyTest {
 
     @Test
     void dayOfWeekCondition_appliesNoneDiscount() {
-        DiscountCondition condition = new DiscountCondition(DayOfWeek.WEDNESDAY);
+        DiscountCondition condition = new DayOfWeekDiscountCondition(DayOfWeek.WEDNESDAY);
 
         Movie movie = new NoneDiscountMovie(
             TITLE_NONE_DISCOUNT,

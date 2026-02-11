@@ -3,8 +3,8 @@ package org.eternity.movie.pratice.movie;
 import java.time.Duration;
 import java.util.List;
 import org.eternity.money.Money;
-import org.eternity.movie.pratice.DiscountCondition;
 import org.eternity.movie.pratice.Screening;
+import org.eternity.movie.pratice.discountcondition.DiscountCondition;
 
 public abstract class Movie {
 
