@@ -10,6 +10,9 @@ import org.junit.jupiter.api.Test;
 
 class ReservationAgencyTest {
 
+    public static final String TITLE_PERCENT_DISCOUNT = "PercentDiscount";
+    public static final String TITLE_NONE_DISCOUNT = "NoneDiscount";
+    public static final String TITLE_NO_DISCOUNT = "NoDiscount";
     private final ReservationAgency agency = new ReservationAgency();
 
     @Test
@@ -36,7 +39,7 @@ class ReservationAgencyTest {
         DiscountCondition condition = new DiscountCondition(2);
 
         Movie movie = new Movie(
-            "PercentDiscount",
+            TITLE_PERCENT_DISCOUNT,
             Duration.ofMinutes(120),
             Money.wons(10_000),
             0.1,
@@ -55,7 +58,7 @@ class ReservationAgencyTest {
         DiscountCondition condition = new DiscountCondition(DayOfWeek.WEDNESDAY);
 
         Movie movie = new Movie(
-            "NoneDiscount",
+            TITLE_NONE_DISCOUNT,
             Duration.ofMinutes(120),
             Money.wons(10_000),
             condition
@@ -73,7 +76,7 @@ class ReservationAgencyTest {
         DiscountCondition condition = new DiscountCondition(5);
 
         Movie movie = new Movie(
-            "NoDiscount",
+            TITLE_NO_DISCOUNT,
             Duration.ofMinutes(120),
             Money.wons(10_000),
             Money.wons(1_000),
