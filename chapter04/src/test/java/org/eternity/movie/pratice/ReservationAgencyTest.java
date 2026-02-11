@@ -14,11 +14,7 @@ class ReservationAgencyTest {
 
     @Test
     void periodCondition_appliesAmountDiscount() {
-        DiscountCondition condition = new DiscountCondition();
-        condition.setType(DiscountConditionType.PERIOD);
-        condition.setDayOfWeek(DayOfWeek.MONDAY);
-        condition.setStartTime(LocalTime.of(10, 0));
-        condition.setEndTime(LocalTime.of(12, 0));
+        DiscountCondition condition = new DiscountCondition(DayOfWeek.MONDAY, LocalTime.of(10, 0), LocalTime.of(12, 0));
 
         Movie movie = new Movie(
             "AmountDiscount",
@@ -37,9 +33,7 @@ class ReservationAgencyTest {
 
     @Test
     void sequenceCondition_appliesPercentDiscount() {
-        DiscountCondition condition = new DiscountCondition();
-        condition.setType(DiscountConditionType.SEQUENCE);
-        condition.setSequence(2);
+        DiscountCondition condition = new DiscountCondition(2);
 
         Movie movie = new Movie(
             "PercentDiscount",
@@ -58,9 +52,7 @@ class ReservationAgencyTest {
 
     @Test
     void dayOfWeekCondition_appliesNoneDiscount() {
-        DiscountCondition condition = new DiscountCondition();
-        condition.setType(DiscountConditionType.DAY_OF_WEEK);
-        condition.setDayOfWeek(DayOfWeek.WEDNESDAY);
+        DiscountCondition condition = new DiscountCondition(DayOfWeek.WEDNESDAY);
 
         Movie movie = new Movie(
             "NoneDiscount",
@@ -78,9 +70,7 @@ class ReservationAgencyTest {
 
     @Test
     void noConditionMatched_usesBaseFee() {
-        DiscountCondition condition = new DiscountCondition();
-        condition.setType(DiscountConditionType.SEQUENCE);
-        condition.setSequence(5);
+        DiscountCondition condition = new DiscountCondition(5);
 
         Movie movie = new Movie(
             "NoDiscount",
