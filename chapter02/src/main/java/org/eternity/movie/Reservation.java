@@ -14,8 +14,4 @@ public class Reservation {
         this.fee = fee;
         this.audienceCount = audienceCount;
     }
-
-    public Money getFee() {
-        return fee;
-    }
 }
