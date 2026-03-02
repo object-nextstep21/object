@@ -2,8 +2,8 @@ package org.eternity.movie;
 
 
 import org.eternity.money.Money;
-import org.eternity.movie.pricing.AmountDiscountPolicy;
-import org.eternity.movie.pricing.SequenceCondition;
+import org.eternity.movie.pratice.AmountDiscountPolicy;
+import org.eternity.movie.pratice.SequenceCondition;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

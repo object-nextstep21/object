@@ -1,4 +1,4 @@
-package org.eternity.movie.pricing;
+package org.eternity.movie.pratice;
 
 import org.eternity.movie.DiscountCondition;
 import org.eternity.movie.Screening;

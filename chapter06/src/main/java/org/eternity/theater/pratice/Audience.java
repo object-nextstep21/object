@@ -11,4 +11,3 @@ public class Audience {
         return this.bag.hold(ticket);
     }
 }
-
