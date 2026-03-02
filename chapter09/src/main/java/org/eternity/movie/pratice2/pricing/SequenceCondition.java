@@ -1,8 +1,8 @@
-package org.eternity.movie.pratice.pricing;
+package org.eternity.movie.pratice2.pricing;
 
 
-import org.eternity.movie.pratice.DiscountCondition;
-import org.eternity.movie.pratice.Screening;
+import org.eternity.movie.pratice2.DiscountCondition;
+import org.eternity.movie.pratice2.Screening;
 
 public class SequenceCondition implements DiscountCondition {
     private int sequence;

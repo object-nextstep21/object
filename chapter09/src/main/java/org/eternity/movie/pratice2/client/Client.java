@@ -1,9 +1,9 @@
-package org.eternity.movie.pratice.client;
+package org.eternity.movie.pratice2.client;
 
 import org.eternity.money.Money;
-import org.eternity.movie.pratice.Movie;
-import org.eternity.movie.pratice.pricing.AmountDiscountPolicy;
-import org.eternity.movie.pratice.pricing.SequenceCondition;
+import org.eternity.movie.pratice2.Movie;
+import org.eternity.movie.pratice2.pricing.AmountDiscountPolicy;
+import org.eternity.movie.pratice2.pricing.SequenceCondition;
 
 import java.time.Duration;
 
