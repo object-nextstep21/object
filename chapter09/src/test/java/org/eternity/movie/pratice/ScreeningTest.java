@@ -1,6 +1,7 @@
 package org.eternity.movie.pratice;
 
 import org.eternity.money.Money;
+import org.eternity.movie.pratice.client.Client;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -26,5 +27,16 @@ class ScreeningTest {
 
         assertThat(expectedFee).isEqualTo(Money.wons(7200));
     }
+
+    @Test
+    @DisplayName("Client로 직접 생성")
+    void newClient() {
+        Client client = new Client();
+        Money fee = client.getAvatarFee();
+
+        assertThat(fee).isEqualTo(Money.wons(10000));
+    }
+
+
 
 }
