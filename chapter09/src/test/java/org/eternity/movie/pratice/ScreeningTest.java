@@ -2,6 +2,7 @@ package org.eternity.movie.pratice;
 
 import org.eternity.money.Money;
 import org.eternity.movie.pratice.client.Client;
+import org.eternity.movie.pratice.client.Factory;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -30,13 +31,20 @@ class ScreeningTest {
 
     @Test
     @DisplayName("Client로 직접 생성")
-    void newClient() {
+    void newConstructorClient() {
         Client client = new Client();
-        Money fee = client.getAvatarFee();
+        Money fee = client.getAvatarFeeToClient();
 
         assertThat(fee).isEqualTo(Money.wons(10000));
     }
 
+    @Test
+    @DisplayName("Fatory로 생성")
+    void newConstructorFactory() {
+        Client client = new Client(new Factory());
+        Money fee = client.getAvatarFee();
+        assertThat(fee).isEqualTo(Money.wons(10000));
+    }
 
 
 }

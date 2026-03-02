@@ -7,18 +7,9 @@ import org.eternity.movie.pratice.pricing.SequenceCondition;
 
 import java.time.Duration;
 
-public class Client {
-    private Factory factory;
-
-    public Client() {
-    }
-
-    public Client(Factory factory) {
-        this.factory = factory;
-    }
-
-    public Money getAvatarFeeToClient() {
-        Movie avatar = new Movie(
+public class Factory {
+    public Movie createAvatarMovie(){
+        return new Movie(
                 "아바타",
                 Duration.ofMinutes(120),
                 Money.wons(10000),
@@ -27,11 +18,5 @@ public class Client {
                         new SequenceCondition(1)
                 )
         );
-        return avatar.getFee();
-    }
-
-    public Money getAvatarFee() {
-        Movie avatar = factory.createAvatarMovie();
-        return avatar.getFee();
     }
 }
