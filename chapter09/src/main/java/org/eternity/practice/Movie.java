@@ -1,7 +1,8 @@
-package org.eternity.practice.step01;
+package org.eternity.practice;
 
 import java.time.Duration;
 import org.eternity.money.Money;
+import org.eternity.practice.pricing.NoneDiscountPolicy;
 
 public class Movie {
     private String title;

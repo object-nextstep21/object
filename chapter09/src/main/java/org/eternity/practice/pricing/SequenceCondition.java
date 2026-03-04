@@ -1,7 +1,7 @@
-package org.eternity.practice.step01.pricing;
+package org.eternity.practice.pricing;
 
-import org.eternity.practice.step01.DiscountCondition;
-import org.eternity.practice.step01.Screening;
+import org.eternity.practice.DiscountCondition;
+import org.eternity.practice.Screening;
 
 public class SequenceCondition implements DiscountCondition {
     private int sequence;

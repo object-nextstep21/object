@@ -1,4 +1,4 @@
-package org.eternity.practice.step01;
+package org.eternity.practice;
 
 import org.eternity.money.Money;
 

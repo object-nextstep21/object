@@ -1,9 +1,9 @@
-package org.eternity.practice.step01.pricing;
+package org.eternity.practice.pricing;
 
 import org.eternity.money.Money;
-import org.eternity.practice.step01.DiscountCondition;
-import org.eternity.practice.step01.DiscountPolicy;
-import org.eternity.practice.step01.Screening;
+import org.eternity.practice.DiscountCondition;
+import org.eternity.practice.DiscountPolicy;
+import org.eternity.practice.Screening;
 
 public class PercentDiscountPolicy extends DiscountPolicy {
     private double percent;

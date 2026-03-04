@@ -1,4 +1,4 @@
-package org.eternity.practice.step01;
+package org.eternity.practice;
 
 public class Customer {
 	private String name;

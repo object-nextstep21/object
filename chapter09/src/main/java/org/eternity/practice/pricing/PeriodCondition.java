@@ -1,9 +1,9 @@
-package org.eternity.practice.step01.pricing;
+package org.eternity.practice.pricing;
 
 import java.time.DayOfWeek;
 import java.time.LocalTime;
-import org.eternity.practice.step01.DiscountCondition;
-import org.eternity.practice.step01.Screening;
+import org.eternity.practice.DiscountCondition;
+import org.eternity.practice.Screening;
 
 public class PeriodCondition implements DiscountCondition {
     private DayOfWeek dayOfWeek;

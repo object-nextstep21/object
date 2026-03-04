@@ -1,10 +1,10 @@
-package org.eternity.practice.step01.client;
+package org.eternity.practice.client;
 
 import java.time.Duration;
 import org.eternity.money.Money;
-import org.eternity.practice.step01.Movie;
-import org.eternity.practice.step01.pricing.AmountDiscountPolicy;
-import org.eternity.practice.step01.pricing.SequenceCondition;
+import org.eternity.practice.Movie;
+import org.eternity.practice.pricing.AmountDiscountPolicy;
+import org.eternity.practice.pricing.SequenceCondition;
 
 public class Client {
     public Money getAvatarFee() {
@@ -17,4 +17,5 @@ public class Client {
                     new SequenceCondition(10)));
         return avatar.getFee();
     }
+
 }

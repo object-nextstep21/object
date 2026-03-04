@@ -1,4 +1,4 @@
-package org.eternity.practice.step01;
+package org.eternity.practice;
 
 import java.util.ArrayList;
 import java.util.Arrays;

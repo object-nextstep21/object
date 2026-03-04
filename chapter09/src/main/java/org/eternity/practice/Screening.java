@@ -1,4 +1,4 @@
-package org.eternity.practice.step01;
+package org.eternity.practice;
 
 import java.time.LocalDateTime;
 import org.eternity.money.Money;
