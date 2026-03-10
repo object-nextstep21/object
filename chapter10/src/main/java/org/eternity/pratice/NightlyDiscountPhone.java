@@ -10,22 +10,9 @@ public class NightlyDiscountPhone extends Phone {
 
     private Money nightlyAmount;
 
-    public NightlyDiscountPhone(Money nightlyAmount, Money regularAmount, Duration seconds) {
-        super(regularAmount, seconds);
+    public NightlyDiscountPhone(Money nightlyAmount, Money regularAmount, Duration seconds, double texRet) {
+        super(regularAmount, seconds, texRet);
         this.nightlyAmount = nightlyAmount;
     }
 
-    public Money calculateFee() {
-        Money result = Money.ZERO;
-
-        for(Call call : getCalls()) {
-            if (call.getFrom().getHour() >= LATE_NIGHT_HOUR) {
-                result = result.plus(nightlyAmount.times(call.getDuration().getSeconds() / getSeconds().getSeconds()));
-            } else {
-                result = result.plus(getAmount().times(call.getDuration().getSeconds() / getSeconds().getSeconds()));
-            }
-        }
-
-        return result;
-    }
 }
