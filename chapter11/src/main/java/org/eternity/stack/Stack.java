@@ -17,4 +17,8 @@ public class Stack<E> {
         }
         return elements.remove(elements.size() - 1);
     }
+
+
+
+
 }
