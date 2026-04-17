@@ -1,4 +1,4 @@
-package org.eternity.movie;
+package org.eternity.movie.pratice2;
 
 import org.eternity.money.Money;
 
@@ -13,9 +13,5 @@ public class Reservation {
         this.Screening = Screening;
         this.fee = fee;
         this.audienceCount = audienceCount;
-    }
-
-    public Money getFee() {
-        return fee;
     }
 }
