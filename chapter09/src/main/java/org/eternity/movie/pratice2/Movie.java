@@ -1,8 +1,9 @@
-package org.eternity.movie;
+package org.eternity.movie.pratice2;
 
 import org.eternity.money.Money;
-import org.eternity.movie.pratice.AmountDiscountPolicy;
-import org.eternity.movie.pratice.SequenceCondition;
+import org.eternity.movie.pratice2.locator.ServiceLocator;
+import org.eternity.movie.pratice2.pricing.AmountDiscountPolicy;
+import org.eternity.movie.pratice2.pricing.SequenceCondition;
 
 import java.time.Duration;
 
@@ -12,13 +13,8 @@ public class Movie {
     private Money fee;
     private DiscountPolicy discountPolicy;
 
-    // 과제2 : new로 직접 생성하는 코드 작성
     public Movie(String title, Duration runningTime, Money fee) {
-        this(title, runningTime, fee, new AmountDiscountPolicy(
-                        Money.wons(800),
-                        new SequenceCondition(1)
-                )
-        );
+        this(title, runningTime, fee, ServiceLocator.discountPolicy());
     }
 
     public Movie(String title, Duration runningTime, Money fee, DiscountPolicy discountPolicy) {
@@ -28,17 +24,22 @@ public class Movie {
         this.discountPolicy = discountPolicy;
     }
 
-    // Setter를 통해 주입
-    public void changeDiscountPolicy(DiscountPolicy discountPolicy) {
-        this.discountPolicy = discountPolicy;
-    }
-
     public Money getFee() {
         return fee;
     }
 
     public Money calculateMovieFee(Screening screening) {
         return fee.minus(discountPolicy.calculateDiscountAmount(screening));
+    }
+
+    @Override
+    public String toString() {
+        return "Movie{" +
+                "title='" + title + '\'' +
+                ", runningTime=" + runningTime +
+                ", fee=" + fee +
+                ", discountPolicy=" + discountPolicy +
+                '}';
     }
 }
 
